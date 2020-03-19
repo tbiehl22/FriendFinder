@@ -1,20 +1,14 @@
-var express = require("express");
-var app = express();
-var path = require('path');
-var PORT = 3000;
+const express = require("express");
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+const htmlRoutes = require('./app/routing/htmlRoutes');
+const apiRoutes = require('./app/routing/apiRoutes');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.text());
 
-app.get("/", function(req, res) {
-    res.sendFile(path.join(__dirname, "apiRoutes"));
-  });
-  
-  app.get("/add", function(req, res) {
-    res.sendFile(path.join(__dirname, "htmlRoutes"));
-  });
-
-app.listen(PORT, function() {
-    console.log("FriendFinder listening on PORT " + PORT);
-  });
+app.listen(PORT, function () {
+  return console.log("Your app is listening on port " + PORT);
+});
