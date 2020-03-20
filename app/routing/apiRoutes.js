@@ -1,34 +1,50 @@
-var friendList = require('../data/friends');
+var friendList = require('../data/friends.js');
+console.log(friendList);
 
 module.exports = function(app){
   app.get('/api/friends', function(req,res){
     res.json(friendList);
   });
 
-  app.post('/api/friends', function(req,res){
-    var newFriendScores = req.body.scores;
-    var scoresArray = [];
-    var friendCount = 0;
-    var bestMatch = 0;
+  app.post('/api/friends', function(req, res){
+    console.log(req.body);
 
-    for(var i=0; i<friendList.length; i++){
-      var scoresDiff = 0;
-      for(var j=0; j<newFriendScores.length; j++){
-        scoresDiff += (Math.abs(parseInt(friendList[i].scores[j]) - parseInt(newFriendScores[j])));
+    var bestMatch = {
+      name: "",
+      img: "",
+      difference: 20
+    };
+
+    var newFriend = req.body;
+    var newImg = req.body.newImg;
+    var newName = req.body.newName;
+    var newScores = req.body.scores;
+
+    var friendCalc = 0;
+
+    for (var i = 0; i < friendsData.length; i++) {
+      console.log(friendsData[i].friendName);
+      friendCalc = 0;
+
+      for (var j = 0; j < friendsData[i].scores.length; j++) {
+				friendCalc += Math.abs(friendsData[i].scores[j] - newScores[j]);
+				console.log("friendCalc: " + friendCalc);
+
+				if (friendCalc < bestMatch.difference) {
+					bestMatch.name = friendsData[i].friendName;
+					bestMatch.img = friendsData[i].friendImg;
+					bestMatch.difference = friendCalc;
+					console.log("bestMatch.name: " + bestMatch.name);
+					console.log("bestMatch.difference: " + bestMatch.difference);
+				}
       }
-
-      scoresArray.push(scoresDiff);
+      console.log("bestMatch" + bestMatch.name);
+			console.log("bestMatch.img: " + bestMatch.img);
     }
+    friendsData.push(newFriend);
+		res.json(bestMatch);
 
-    for(var i=0; i<scoresArray.length; i++){
-      if(scoresArray[i] <= scoresArray[bestMatch]){
-        bestMatch = i;
-      }
-    }
-
-    var bff = friendList[bestMatch];
-    res.json(bff);
-
-    friendList.push(req.body);
   });
-};
+
+}
+
