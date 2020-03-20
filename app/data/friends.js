@@ -17,7 +17,7 @@ var friendsArray = [
       },
       {
         friendName: "Ahmed",
-        friendImg: "https://images.pexels.com/photos/45882/man-crazy-funny-dude-45882.jpeg?w=940&h=650&auto=compress&cs=tinysrgb",
+        friendImg: "https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg",
         scores: [
             3,
             1,
