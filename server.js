@@ -1,14 +1,14 @@
-const express = require("express");
-const app = express();
+var express = require("express");
+var app = express();
 
-const PORT = process.env.PORT || 3000;
-
-const htmlRoutes = require('./app/routing/htmlRoutes');
-const apiRoutes = require('./app/routing/apiRoutes');
+var PORT = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.listen(PORT, function () {
-  return console.log("Your app is listening on port " + PORT);
+require('./app/routing/apiRoutes.js')(app);
+require('./app/routing/htmlRoutes.js')(app);
+
+app.listen(PORT, function() {
+  console.log("Friend Finder is listening on PORT " + PORT);
 });
