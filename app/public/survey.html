@@ -182,6 +182,7 @@
 					<img id="bestImg">
 				</div>
 				<div class="modal-footer">
+					<!-- <button type="button" class="btn btn-primary">Save changes</button> -->
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 				</div>
 			</div>
@@ -194,7 +195,7 @@
 
 	$(".submit").on("click", function(event) {
 		event.preventDefault();
-		alert("Thank you for submitting");
+		alert("Thank you for submitting your survey!");
 		var newFriend = {
 	        newName: $("#friendName").val().trim(),
 	        newImg: $("#friendImg").val().trim(),
@@ -211,29 +212,23 @@
 	        	$("#question10").val()
 	        ]
     };
-    //log newFriend captured from form
     //console.log(newFriend);
     //console.log(newFriend.newName);
-    //this is what I need to do the friend match up
     //console.log(newFriend.scores);
     //console.log(newFriend[0].score);
 
 
     $.post("/api/friends", newFriend,
         function(data) {
-
 	        if (data) {
-	            //alert("Yay! You are part of the FriendFinder Network, please wait for your best friend match!");
 	            $('#bestName').text(data.name);
           		$('#bestImg').attr("src", data.img).addClass("img-fluid");
-	            //show modal with best friend match
 	    		$('#executeModal').modal('toggle');        
-	  	   		//   $('#myModal').on('shown.bs.modal', function () {
-					// 	$('#myInput').trigger('focus')
-				// })
+	  	   		  $('#myModal').on('shown.bs.modal', function () {
+						$('#myInput').trigger('focus')
+				})
           	}
 
-          	// ?
           	else {
             	alert("Sorry we are having problems, please try again");
           	}
