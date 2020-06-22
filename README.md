@@ -4,7 +4,7 @@ Build a compatibility-based "FriendFinder" application -- basically a dating app
 
 Use Express to handle routing. Make sure to deploy the app to Heroku so other users can fill it out.
 
-[img](app/img/FriendFinder.png)
+![img](app/img/FriendFinder.png)
 
 ## Deployed App
 https://stormy-sea-82968.herokuapp.com/
